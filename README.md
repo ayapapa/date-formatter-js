@@ -1,3 +1,4 @@
+[![CI](https://github.com/ayapapa/date-formatter-js/actions/workflows/ci.yml/badge.svg)](https://github.com/ayapapa/date-formatter-js/actions/workflows/ci.yml)
 # date-formatter-js
 A lightweight date and time formatter designed for log and console output. 
 The formatting specifications are inspired by C# Custom Date and Time Format Strings.
