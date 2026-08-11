@@ -26,20 +26,29 @@ const formatters = {
 } as const;
 
 /** Format element type */
-export type FmtType = keyof typeof formatters; 
+type FmtType = keyof typeof formatters; 
 
+/** Definition of elements extracted by parsing `pattern` */
+type ParsedPart = { type: "token"; value: FmtType } | { type: "literal"; value: string };
 
 /**
- * Date formatter:
- * A lightweight date and time formatter for JavaScript designed for log and console output, with specifications based on C# formatting rules.
+ * A lightweight date and time formatter designed for log and console output.
+ * The formatting specifications are inspired by C# Custom Date and Time Format Strings.
  */
 export class DateFormatter {
 
   /**
-   * Get a formatted date-time string.
-   * @param [date]    Date instance. Default is new Date().
-   * @param [pattern] Format pattern. Default is "yyyy/MM/dd HH:mm:ss.fff".
-   * @returns Formatted datetime string.
+   * Returns a formatted date-time string based on the specified pattern.
+   * 
+   * @param date - The Date instance to format.
+   * @param pattern - The format pattern string containing tokens (e.g., "yyyy", "MM").
+   * @returns The formatted date-time string.
+   * 
+   * @default date `new Date()`
+   * @default pattern `"yyyy/MM/dd HH:mm:ss.fff"`
+   * 
+   * @example
+   * DateFormatter.format(new Date(2026, 7, 11), "yyyy-MM-dd"); // "2026-08-11"
    */
   public static format(
     date: Date = new Date(),
@@ -54,11 +63,18 @@ export class DateFormatter {
       .join("");
   }
 
-  private static tokenize(pattern: string): { type: string, value: FmtType }[] {
-    const tokens = Object.keys(formatters)
+  /**
+   * Tokenizes the format pattern into individual format tokens and literal characters.
+   * 
+   * @internal
+   * @param pattern - The format pattern string to tokenize.
+   * @returns An array of parsed token objects containing the type and token/literal value.
+   */
+  private static tokenize(pattern: string): ParsedPart[] {
+    const tokens = (Object.keys(formatters) as FmtType[])
       .sort((a, b) => b.length - a.length);
 
-    const result = [];
+    const result: ParsedPart[] = [];
     let i = 0;
 
     while (i < pattern.length) {
@@ -69,14 +85,14 @@ export class DateFormatter {
       if (token) {
         result.push({
           type: "token",
-          value: token as FmtType
+          value: token
         });
 
         i += token.length;
       } else {
         result.push({
           type: "literal",
-          value: pattern[i]  as FmtType
+          value: pattern[i] 
         });
 
         i++;
@@ -86,10 +102,17 @@ export class DateFormatter {
     return result;
   }
 
-  /** Cached patterns */
-  private static cache = new Map();
+  /** Cache store for parsed patterns to optimize performance. */
+  private static cache = new Map<string, ParsedPart[]>();
 
-  private static getTokens(pattern: string): { type: string, value: FmtType }[] {
+  /**
+   * Retrieves parsed tokens from the cache, or tokenizes and caches the pattern if not found.
+   * 
+   * @internal
+   * @param pattern - The format pattern string.
+   * @returns An array of parsed token objects.
+   */
+  private static getTokens(pattern: string): ParsedPart[] {
     let tokens = DateFormatter.cache.get(pattern);
 
     if (tokens === undefined) {

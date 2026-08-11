@@ -95,6 +95,24 @@ describe("DateFormatter", () => {
 
       vi.useRealTimers();
     });
+
+    it("should interpret tokens greedily even without delimiters", () => {
+      expect(DateFormatter.format(testDate, "yyyyMMddHHmmssfff"))
+        .toBe("20260205090403012");
+    });
+
+    it("should return an empty string for an empty pattern", () => {
+      expect(DateFormatter.format(testDate, "")).toBe("");
+    });
+
+    it("should unknown strings remain as literals.", () => {
+      expect(DateFormatter.format(testDate, "created_at=yyyy")).toBe("create5_at=2026");
+    });
+
+    it("should format boundary values with zero padding", () => {
+      const date = new Date(2026, 0, 1, 0, 0, 0, 0);
+      expect(DateFormatter.format(date)).toBe("2026/01/01 00:00:00.000");
+    });
   });
 
   describe("Token Cache System", () => {

@@ -1,12 +1,11 @@
 # date-formatter-js
-A lightweight date and time formatter for JavaScript designed for log and console output, with specifications based on C# formatting rules.
-
+ｘ
 ## Installation
 ```bash
 npm install @ayapapa-npm/date-formatter-js
 ```
 ## Interface
-DateFomatter.format(date: Date = new Date(), pattern: string = "yyyy/MM/dd HH:mm:ss.fff");
+DateFormatter.format(date: Date = new Date(), pattern: string = "yyyy/MM/dd HH:mm:ss.fff");
 
 ## Pattern specification element
 | Token  | Meaning                 |
@@ -28,14 +27,20 @@ DateFomatter.format(date: Date = new Date(), pattern: string = "yyyy/MM/dd HH:mm
 | `f`    | milliseconds (1 digit)  |
 
 ## Usage
-```
-import { DateFomatter } from '@ayapapa-npm/date-formatter-js';
-// CommonJS:
-// const { DateFomatter } = require('@ayapapa-npm/date-formatter-js');
 
-function outputDate(date = new Date) {
-  const pattern = "yyyy/MM/dd HH:mm:ss.fff";
-  const datetimeStr = DateFomatter.format(date, pattern);
-  console.log('Datetime:', datetimeStr); 
+```ts
+import { DateFormatter } from '@ayapapa-npm/date-formatter-js';
+
+function outputDate(date: Date): void {
+  const pattern: string = "yyyy/MM/dd HH:mm:ss.fff";
+  const datetimeStr: string = DateFormatter.format(
+    date,
+    pattern
+  );
+  console.log('Datetime:', datetimeStr);
+}
+
+function main(): void {
+  outputDate(new Date(2026, 7, 11, 12, 34, 56, 789)); // "2026/08/11 12:34:56.789"
 }
 ```

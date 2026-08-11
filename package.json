@@ -1,6 +1,6 @@
 {
   "name": "@ayapapa-npm/date-formatter-js",
-  "version": "0.1.2",
+  "version": "0.1.0",
   "description": "A lightweight date and time formatter for JavaScript designed for log and console output, with specifications based on C# formatting rules.",
   "license": "MIT",
   "author": "ayapapa",
