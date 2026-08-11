@@ -3,7 +3,7 @@ A lightweight date/time formatter for JavaScript, designed for logging and conso
 
 ## Installation
 ```bash
-npm install @ayapapa-npm/pretty-console-js
+npm install @ayapapa-npm/date-formatter-js
 ```
 ## Interface
 DateFomatter.format(date: Date = new Date(), pattern: string = "yyyy/MM/dd HH:mm:ss.fff");
