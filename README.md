@@ -1,5 +1,7 @@
 # date-formatter-js
-ｘ
+A lightweight date and time formatter designed for log and console output. 
+The formatting specifications are inspired by C# Custom Date and Time Format Strings.
+
 ## Installation
 ```bash
 npm install @ayapapa-npm/date-formatter-js
