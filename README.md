@@ -43,6 +43,6 @@ function outputDate(date: Date): void {
 }
 
 function main(): void {
-  outputDate(new Date(2026, 7, 11, 12, 34, 56, 789)); // "2026/08/11 12:34:56.789"
+  outputDate(new Date(2026, 7, 11, 12, 34, 56, 789)); // Datetime: "2026/08/11 12:34:56.789"
 }
 ```
