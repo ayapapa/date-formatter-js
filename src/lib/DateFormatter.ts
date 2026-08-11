@@ -1,6 +1,6 @@
 /**
  * Format elements
- **/
+ */
 const formatters = {
   yyyy: (date: Date) => String(date.getFullYear()),
   yy:   (date: Date) => String(date.getFullYear()).slice(-2),
