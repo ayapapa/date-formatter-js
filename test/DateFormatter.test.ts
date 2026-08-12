@@ -1,9 +1,9 @@
 import { describe, it, expect, vi } from "vitest";
-import { DateFormatter } from "../src/lib/DateFormatter"; // Adjust the file path as needed
+import { DateFormatter } from "../src/index"; // Adjust the file path as needed
 
 describe("DateFormatter", () => {
   // Base date for testing: February 5, 2026, 09:04:03.012
-  const testDate = new Date(2026, 1, 5, 9, 4, 3, 12);
+  const testDate: Date = new Date(2026, 1, 5, 9, 4, 3, 12);
 
   describe("format", () => {
     it("should format correctly with the default pattern", () => {

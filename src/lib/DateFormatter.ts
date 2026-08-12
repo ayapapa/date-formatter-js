@@ -25,11 +25,11 @@ const formatters = {
   f:   (date: Date) => String(date.getMilliseconds()).padStart(3, "0").slice(0, 1),
 } as const;
 
-/** Format element type */
-type FmtType = keyof typeof formatters; 
+/** Format element type, that is the type of `formatter`'s key. */
+type FmtrKey = keyof typeof formatters; 
 
 /** Definition of elements extracted by parsing `pattern` */
-type ParsedPart = { type: "token"; value: FmtType } | { type: "literal"; value: string };
+type ParsedPart = { type: "token"; value: FmtrKey } | { type: "literal"; value: string };
 
 /**
  * A lightweight date and time formatter designed for log and console output.
@@ -71,7 +71,7 @@ export class DateFormatter {
    * @returns An array of parsed token objects containing the type and token/literal value.
    */
   private static tokenize(pattern: string): ParsedPart[] {
-    const tokens = (Object.keys(formatters) as FmtType[])
+    const tokens = (Object.keys(formatters) as FmtrKey[])
       .sort((a, b) => b.length - a.length);
 
     const result: ParsedPart[] = [];
